@@ -1,27 +1,12 @@
-VBA Stock Market Analysis
+# VBA Stock Market Analysis
 
-Project Overview
+# Project Overview
 
 This project demonstrates the use of VBA scripting to analyze stock market data. The script loops through each quarter’s data to calculate key metrics for each stock, including quarterly change, percentage change, and total volume. Additionally, the script identifies the stocks with the greatest percentage increase, greatest percentage decrease, and greatest total volume.
 
 By automating data analysis tasks with VBA, this project reduces the tediousness of manual calculations, providing accurate results with just a click of a button.
 
-Project Structure
-
-The project is organized as follows:
-
-VBA-challenge/
-├── data/
-│   └── alphabetical_testing.xlsx
-├── scripts/
-│   └── stock_analysis.vba
-├── output/
-│   ├── quarterly_analysis.xlsx
-│   └── summary_report.xlsx
-├── visualizations/
-│   └── summary_charts.png
-└── README.md
-Analysis and Features
+# Analysis and Features
 
 Key Calculations
 The VBA script performs the following calculations for each stock on every worksheet (quarter):
@@ -40,7 +25,8 @@ Positive changes are highlighted in green.
 Negative changes are highlighted in red.
 Multi-Sheet Support:
 The script automatically processes each worksheet (representing a quarter) without manual intervention.
-How to Run the Project
+
+# How to Run the Project
 
 Prerequisites
 Microsoft Excel (Windows version with VBA support)
@@ -52,18 +38,21 @@ Run the Script:
 Press F5 or click Run to execute the script.
 The script will automatically process each worksheet and generate the analysis.
 View Results: The results will be displayed on each sheet, with conditional formatting applied to indicate positive and negative changes.
-Example Output
+
+# Example Output
 
 The script produces the following key outputs:
 
 Quarterly Analysis: Displays ticker symbol, quarterly change, percentage change, and total volume.
 Summary Report: Identifies the stock with the greatest percentage increase, decrease, and total volume.
 Conditional Formatting: Clearly highlights gains and losses with green and red formatting, respectively.
-Performance Optimization
+
+# Performance Optimization
 
 Testing on Smaller Dataset: Use the alphabetical_testing.xlsx file for faster testing and debugging.
 Efficient Looping: The script is optimized to minimize processing time, even when handling large datasets.
-Challenges and Solutions
+
+# Challenges and Solutions
 
 Challenge: Multi-Sheet Processing
 Solution: The script dynamically detects all worksheets and processes each one individually.
@@ -74,7 +63,7 @@ Solution: Implemented error handling for division by zero and ensured formatting
 Challenge: Performance on Large Datasets
 Solution: Optimized the loop and reduced unnecessary operations to improve script execution speed.
 
-Troubleshooting
+# Troubleshooting
 
 Issue: Script Not Running
 Ensure that macros are enabled in Excel (File -> Options -> Trust Center -> Trust Center Settings -> Macro Settings -> Enable all macros).
