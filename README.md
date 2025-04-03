@@ -1,136 +1,82 @@
-<img width="1298" alt="Screenshot 2025-01-05 at 11 31 00 PM" src="https://github.com/user-attachments/assets/f590329e-c998-4d9b-8b1f-e6b88413043c" />
-<img width="1296" alt="Screenshot 2025-01-05 at 11 31 15 PM" src="https://github.com/user-attachments/assets/1e284a98-8546-4fba-86df-5df950c4277c" />
-<img width="1300" alt="Screenshot 2025-01-05 at 11 31 28 PM" src="https://github.com/user-attachments/assets/62ce9efc-344e-450a-9565-d6441cf31ef7" />
-<img width="1302" alt="Screenshot 2025-01-05 at 11 31 47 PM" src="https://github.com/user-attachments/assets/0d7b47df-45df-4f90-a3e2-7ff14965afde" />
+VBA Stock Market Analysis
 
+Project Overview
 
+This project demonstrates the use of VBA scripting to analyze stock market data. The script loops through each quarter’s data to calculate key metrics for each stock, including quarterly change, percentage change, and total volume. Additionally, the script identifies the stocks with the greatest percentage increase, greatest percentage decrease, and greatest total volume.
 
+By automating data analysis tasks with VBA, this project reduces the tediousness of manual calculations, providing accurate results with just a click of a button.
 
+Project Structure
 
-Sub MultipleYearStockData()
-    Dim ws As Worksheet
-    Dim lastRow As Long
-    Dim ticker As String
-    Dim openPrice As Double
-    Dim closePrice As Double
-    Dim totalVolume As Double
-    Dim quarterlyChange As Double
-    Dim percentageChange As Double
-    Dim summaryRow As Long
-    Dim greatestIncrease As Double
-    Dim greatestDecrease As Double
-    Dim greatestVolume As Double
-    Dim greatestIncreaseTicker As String
-    Dim greatestDecreaseTicker As String
-    Dim greatestVolumeTicker As String
-    
-    
-    ' Loop through each worksheet
-    For Each ws In ThisWorkbook.Worksheets
-    ' Table headers
-    ws.Cells(1, 10).Value = "Ticker"
-    ws.Cells(1, 11).Value = "Quarterly Change"
-    ws.Cells(1, 12).Value = "Percent Change"
-    ws.Cells(1, 13).Value = "Total Volume"
-    ws.Cells(1, 16).Value = "Ticker"
-    ws.Cells(1, 17).Value = "Value"
-        
-    lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
-    summaryRow = 2
-        
-    Dim startRow As Long
-    startRow = 2
-        
-    ' Variables to track greatest values
-    greatestIncrease = -1
-    greatestDecrease = 1
-    greatestVolume = 0
-    greatestIncreaseTicker = ""
-    greatestDecreaseTicker = ""
-    greatestVolumeTicker = ""
-        
-    ' Loop through each ticker
-    Do While startRow <= lastRow
-    ticker = ws.Cells(startRow, 1).Value
-    openPrice = ws.Cells(startRow, 3).Value
-    totalVolume = 0
-            
-    Dim currentRow As Long
-    currentRow = startRow
-            
-    ' Loop through the rows of the same ticker
-    Do While currentRow <= lastRow And ws.Cells(currentRow, 1).Value = ticker
-    totalVolume = totalVolume + ws.Cells(currentRow, 7).Value
-    currentRow = currentRow + 1
-    Loop
-            
-    ' Closing price at the last row of the current ticker
-    closePrice = ws.Cells(currentRow - 1, 6).Value
-            
-    ' Quarterly change and percentage change
-    quarterlyChange = closePrice - openPrice
-    If openPrice <> 0 Then
-    percentageChange = (quarterlyChange / openPrice) * 100
-    Else
-    percentageChange = 0
-    End If
-            
-    ' Output the results in the summary table
-    ws.Cells(summaryRow, 10).Value = ticker
-    ws.Cells(summaryRow, 11).Value = quarterlyChange
-    ws.Cells(summaryRow, 12).Value = percentageChange
-    ws.Cells(summaryRow, 13).Value = totalVolume
-            
-            
-    ' Check for greatest % increase, % decrease, and total volume
-    If percentageChange > greatestIncrease Then
-    greatestIncrease = percentageChange
-    greatestIncreaseTicker = ticker
-    End If
-    If percentageChange < greatestDecrease Then
-    greatestDecrease = percentageChange
-    greatestDecreaseTicker = ticker
-    End If
-    If totalVolume > greatestVolume Then
-    greatestVolume = totalVolume
-    greatestVolumeTicker = ticker
-    End If
-            
-    summaryRow = summaryRow + 1
-    startRow = currentRow
-    Loop
-        
-    ' Output the metric results
-    ws.Cells(2, 15).Value = "Greatest % Increase"
-    ws.Cells(2, 16).Value = greatestIncreaseTicker
-    ws.Cells(2, 17).Value = greatestIncrease
-        
-    ws.Cells(3, 15).Value = "Greatest % Decrease"
-    ws.Cells(3, 16).Value = greatestDecreaseTicker
-    ws.Cells(3, 17).Value = greatestDecrease
-        
-    ws.Cells(4, 15).Value = "Greatest Total Volume"
-    ws.Cells(4, 16).Value = greatestVolumeTicker
-    ws.Cells(4, 17).Value = greatestVolume
-            
-    ' Apply conditional formatting for Quarterly Change
-    Dim rng As Range
-    lastRow = ws.Cells(ws.Rows.Count, 11).End(xlUp).Row
-    Set rng = ws.Range("K2:K" & lastRow)
-        
-    ' Positive change in green
-    With rng.FormatConditions.Add(Type:=xlCellValue, Operator:=xlGreater, Formula1:="=0")
-    .Interior.Color = RGB(144, 238, 144)
-    End With
-        
-    ' Negative change in red
-    With rng.FormatConditions.Add(Type:=xlCellValue, Operator:=xlLess, Formula1:="=0")
-    .Interior.Color = RGB(255, 99, 71)
-    End With
-        
-    Next ws
-    
-End Sub
+The project is organized as follows:
 
+VBA-challenge/
+├── data/
+│   └── alphabetical_testing.xlsx
+├── scripts/
+│   └── stock_analysis.vba
+├── output/
+│   ├── quarterly_analysis.xlsx
+│   └── summary_report.xlsx
+├── visualizations/
+│   └── summary_charts.png
+└── README.md
+Analysis and Features
 
+Key Calculations
+The VBA script performs the following calculations for each stock on every worksheet (quarter):
 
+Ticker Symbol: Identifies the unique stock ticker.
+Quarterly Change: Calculates the difference between the opening price at the beginning and the closing price at the end of the quarter.
+Percentage Change: Calculates the percentage change from the opening to the closing price.
+Total Stock Volume: Sums up the volume traded throughout the quarter.
+Advanced Features
+Greatest Values:
+Greatest Percentage Increase
+Greatest Percentage Decrease
+Greatest Total Volume
+Conditional Formatting:
+Positive changes are highlighted in green.
+Negative changes are highlighted in red.
+Multi-Sheet Support:
+The script automatically processes each worksheet (representing a quarter) without manual intervention.
+How to Run the Project
+
+Prerequisites
+Microsoft Excel (Windows version with VBA support)
+Running the VBA Script
+Open Excel: Open the alphabetical_testing.xlsx file from the data/ folder.
+Access VBA Editor: Press ALT + F11 to open the VBA editor.
+Import the Script: Go to File -> Import File and select the stock_analysis.vba script from the scripts/ folder.
+Run the Script:
+Press F5 or click Run to execute the script.
+The script will automatically process each worksheet and generate the analysis.
+View Results: The results will be displayed on each sheet, with conditional formatting applied to indicate positive and negative changes.
+Example Output
+
+The script produces the following key outputs:
+
+Quarterly Analysis: Displays ticker symbol, quarterly change, percentage change, and total volume.
+Summary Report: Identifies the stock with the greatest percentage increase, decrease, and total volume.
+Conditional Formatting: Clearly highlights gains and losses with green and red formatting, respectively.
+Performance Optimization
+
+Testing on Smaller Dataset: Use the alphabetical_testing.xlsx file for faster testing and debugging.
+Efficient Looping: The script is optimized to minimize processing time, even when handling large datasets.
+Challenges and Solutions
+
+Challenge: Multi-Sheet Processing
+Solution: The script dynamically detects all worksheets and processes each one individually.
+
+Challenge: Accurate Percentage Calculations
+Solution: Implemented error handling for division by zero and ensured formatting consistency for all calculated values.
+
+Challenge: Performance on Large Datasets
+Solution: Optimized the loop and reduced unnecessary operations to improve script execution speed.
+
+Troubleshooting
+
+Issue: Script Not Running
+Ensure that macros are enabled in Excel (File -> Options -> Trust Center -> Trust Center Settings -> Macro Settings -> Enable all macros).
+Issue: Unexpected Formatting
+Check the conditional formatting rules and ensure they are applied correctly for positive and negative changes.
