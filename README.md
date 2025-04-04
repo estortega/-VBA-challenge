@@ -11,19 +11,32 @@ By automating data analysis tasks with VBA, this project reduces the tediousness
 Key Calculations
 The VBA script performs the following calculations for each stock on every worksheet (quarter):
 
-Ticker Symbol: Identifies the unique stock ticker.
-Quarterly Change: Calculates the difference between the opening price at the beginning and the closing price at the end of the quarter.
-Percentage Change: Calculates the percentage change from the opening to the closing price.
-Total Stock Volume: Sums up the volume traded throughout the quarter.
-Advanced Features
+- Ticker Symbol: Identifies the unique stock ticker.
+
+- Quarterly Change: Calculates the difference between the opening price at the beginning and the closing price at the end of the quarter.
+
+- Percentage Change: Calculates the percentage change from the opening to the closing price.
+ 
+- Total Stock Volume: Sums up the volume traded throughout the quarter.
+
+- Advanced Features
+
 Greatest Values:
+
 Greatest Percentage Increase
+
 Greatest Percentage Decrease
+
 Greatest Total Volume
+
 Conditional Formatting:
+
 Positive changes are highlighted in green.
+
 Negative changes are highlighted in red.
+
 Multi-Sheet Support:
+
 The script automatically processes each worksheet (representing a quarter) without manual intervention.
 
 # How to Run the Project
